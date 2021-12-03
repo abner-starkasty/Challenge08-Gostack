@@ -1,5 +1,5 @@
 {
-  "name": "GoMarketplace",
+  "name": "gomarketplace",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "dev:server": "json-server server.json -p 3333"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.9.0",
