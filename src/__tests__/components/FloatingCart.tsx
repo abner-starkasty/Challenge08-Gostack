@@ -1,20 +1,21 @@
+/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable import/first */
 
-import React from 'react';
+import React from 'react'
 
-import { mocked } from 'ts-jest/utils';
-import { render, fireEvent, act } from '@testing-library/react-native';
-import { useNavigation } from '@react-navigation/native';
+import { mocked } from 'ts-jest/utils'
+import { render, fireEvent, act } from '@testing-library/react-native'
+import { useNavigation } from '@react-navigation/native'
 
 jest.mock('@react-navigation/native', () => {
-  const originalModule = jest.requireActual('@react-navigation/native');
+  const originalModule = jest.requireActual('@react-navigation/native')
 
   return {
     __esModule: true,
     ...originalModule,
     useNavigation: jest.fn(),
-  };
-});
+  }
+})
 
 jest.mock('../../hooks/cart.tsx', () => ({
   __esModule: true,
@@ -22,17 +23,17 @@ jest.mock('../../hooks/cart.tsx', () => ({
     addToCart: jest.fn(),
     products: [],
   }),
-}));
+}))
 
 jest.mock('../../utils/formatValue.ts', () => ({
   __esModule: true,
   default: jest.fn().mockImplementation(value => value),
-}));
+}))
 
-import FloatingCart from '../../components/FloatingCart';
-import { useCart } from '../../hooks/cart';
+import FloatingCart from '../../components/FloatingCart'
+import { useCart } from '../../hooks/cart'
 
-const useCartMocked = mocked(useCart);
+const useCartMocked = mocked(useCart)
 
 useCartMocked.mockReturnValue({
   addToCart: jest.fn(),
@@ -56,36 +57,36 @@ useCartMocked.mockReturnValue({
   ],
   increment: jest.fn(),
   decrement: jest.fn(),
-});
+})
 
-const useNavigationMocked = mocked(useNavigation);
+const useNavigationMocked = mocked(useNavigation)
 
-const navigate = jest.fn();
+const navigate = jest.fn()
 
 useNavigationMocked.mockReturnValue({
   navigate,
-} as any);
+} as any)
 
 describe('Dashboard', () => {
   it('should be able to calculate the cart total', async () => {
-    const { getByText } = render(<FloatingCart />);
+    const { getByText } = render(<FloatingCart />)
 
-    expect(getByText('8000')).toBeTruthy();
-  });
+    expect(getByText('8000')).toBeTruthy()
+  })
 
   it('should be able to show the total quantity of itens in the cart', async () => {
-    const { getByText } = render(<FloatingCart />);
+    const { getByText } = render(<FloatingCart />)
 
-    expect(getByText('15 itens')).toBeTruthy();
-  });
+    expect(getByText('15 itens')).toBeTruthy()
+  })
 
   it('should be able to navigate to the cart', async () => {
-    const { getByTestId } = render(<FloatingCart />);
+    const { getByTestId } = render(<FloatingCart />)
 
     act(() => {
-      fireEvent.press(getByTestId('navigate-to-cart-button'));
-    });
+      fireEvent.press(getByTestId('navigate-to-cart-button'))
+    })
 
-    expect(navigate).toHaveBeenCalledWith('Cart');
-  });
-});
+    expect(navigate).toHaveBeenCalledWith('Cart')
+  })
+})

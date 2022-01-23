@@ -29,6 +29,9 @@
     "prettier"
   ],
   "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
+    "react/prop-types": "off",
     "prettier/prettier": "error",
     "camelcase": "off",
     "no-unused-vars": "off",
